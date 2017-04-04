@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>J.C.★YIS::GuessNum</title>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body style="text-align: center;">
+   
+
+<h2>*****歐洲血統測試*****</h2>
+<div id="status"></div>
+<div id="status2"></div><br><br>
+<div id="guide" style="">
+	請猜0~48763的一整數:
+</div>
+
+
+<script type="text/javascript">
+	var n = Math.floor( Math.random() * (48763 - 0 + 1) ) ;	//Math.random = 0~1
+    var maxi=48763, mini=0;
+    var t=0;
+
+   	function guess(){
+   		t+=1;
+   		var inpu = document.forms["main"].input.value;
+   		//document.getElementById('status').innerHTML = inpu
+       	if(inpu==n){
+      	    if(t>=1&&t<=3){
+      	    	document.getElementById('status').innerHTML ="你100%有開外掛";
+      	    }
+       	    else if(t>=4&&t<=15){
+       	    	document.getElementById('status').innerHTML ="U秀，真的U秀";
+       	    }
+       	    else if(t>=15&&t<=30){
+       	    	document.getElementById('status').innerHTML ="勉強啦";
+       	    }
+       	    else {
+       	    	document.getElementById('status').innerHTML ="爛透了";
+       	    }
+       	    document.getElementById('status2').innerHTML = "~~~你猜了" + t + "次~~~";
+       	    $('#xd').fadeOut(487.63);
+       	    $('#guide').fadeOut(487.63);
+        }
+
+
+       	 if(inpu>n){
+       	    document.getElementById('status').innerHTML = "小一點!";
+  			if(inpu<maxi){
+       	   		maxi=inpu;
+  			}
+       	 }
+
+      	  if(inpu<n){
+      	  	document.getElementById('status').innerHTML ="大一點!";
+      	  	if(inpu>mini){
+      	  		mini=inpu;
+      	  	}
+      	  }
+
+      	  if(inpu!=n){
+      	 	document.getElementById('status2').innerHTML = "範圍:" + mini + '~' + maxi ;
+      	 }
+    }
+	
+</script>
+<br>
+<form name="main" id="xd">
+	<input id="input" type="text" onkeypress="if (window.event.keyCode==13) return false;" style="width: 100px; height: 50px;font-size: 26px">
+	<br><br>
+	<input id="submit" type="button" onclick="guess()" value="決定!" style="width: 80px; height: 50px;font-size: 22px ">
+</form>
+
+
+    
+<!--C++
+   #include<stdio.h>
+    #include<stdlib.h>
+    #include<iostream>
+    #include<time.h>
+int main(){
+    std::cout<<"*****歐洲血統測試*****\n"<<"請猜0~48763的一整數:";
+    srand(time(NULL));
+    int wow=(rand()*48431+66641)%48764;
+    int maxi=48763, mini=0;
+    int input=0;
+    for(int t=1;"shou"=="shou";t++){
+        std::cin>>input;
+        if(input==wow){
+            if(t>=1&&t<=3){std::cout<<"靠!你一定有開外掛";}
+            else if(t>=4&&t<=15){std::cout<<"U秀";}
+            else if(t>=15&&t<=30){std::cout<<"勉強啦";}
+            else {std::cout<<"爛透了";}
+            std::cout<<"\n+++---你猜了"<<t<<"次---+++";
+            return 48763;
+        }
+
+
+
+        if(input>wow){
+            std::cout<<"小一點!";maxi=input;
+        }
+
+        if(input<wow){std::cout<<"大一點!";mini=input;}
+        std::cout<<"(範圍:"<<mini<<'~'<<maxi<<"):";
+    }
+
+    }
+-->
+</body>
+</html>
