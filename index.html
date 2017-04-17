@@ -5,107 +5,109 @@
 	<meta charset="utf-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-<body style="text-align: center;">
+<body style="text-align: center; font-family: 'Hall Fetica','Hall Fetica+'">
    
 
 <h2>*****歐洲血統測試*****</h2>
-<div id="status"></div>
+<div id="status">V.2.0</div>
 <div id="status2"></div><br><br>
-<div id="guide" style="">
-	請猜0~48763的一整數:
+<div id="guide">
+	請猜 0 ~ 48763 的一整數:
+</div>
+<br>
+
+<div id="rangebar" style="position: absolute; left:20%; top:100px;height: 200px; width: 5px;background: gray">
+  <div id="cur.range" style="position: absolute; left:0px; top:0px;height: 200px; width: 5px;background: green">  
+  </div>
+  <div id="mini.tag" style="position: absolute; left:10px; top:-10px;">0</div>
+  <div id="percent.tag" style="position: absolute; left:-50px; top:90px">100%</div>
+  <div id="maxi.tag" style="position: absolute; left:10px; top:190px;">48763</div>
 </div>
 
+<a href="" id="RE" style="display: none; font-size: 87px">REPLAY</a>
 
-<script type="text/javascript">
-	var n = Math.floor( Math.random() * (48763 - 0 + 1) ) ;	//Math.random = 0~1
-    var maxi=48763, mini=0;
-    var t=0;
-
-   	function guess(){
-   		t+=1;
-   		var inpu = document.forms["main"].input.value;
-   		//document.getElementById('status').innerHTML = inpu
-       	if(inpu==n){
-      	    if(t>=1&&t<=3){
-      	    	document.getElementById('status').innerHTML ="你100%有開外掛";
-      	    }
-       	    else if(t>=4&&t<=15){
-       	    	document.getElementById('status').innerHTML ="U秀，真的U秀";
-       	    }
-       	    else if(t>=15&&t<=30){
-       	    	document.getElementById('status').innerHTML ="勉強啦";
-       	    }
-       	    else {
-       	    	document.getElementById('status').innerHTML ="爛透了";
-       	    }
-       	    document.getElementById('status2').innerHTML = "~~~你猜了" + t + "次~~~";
-       	    $('#xd').fadeOut(487.63);
-       	    $('#guide').fadeOut(487.63);
-        }
-
-
-       	 if(inpu>n){
-       	    document.getElementById('status').innerHTML = "小一點!";
-  			if(inpu<maxi){
-       	   		maxi=inpu;
-  			}
-       	 }
-
-      	  if(inpu<n){
-      	  	document.getElementById('status').innerHTML ="大一點!";
-      	  	if(inpu>mini){
-      	  		mini=inpu;
-      	  	}
-      	  }
-
-      	  if(inpu!=n){
-      	 	document.getElementById('status2').innerHTML = "範圍:" + mini + '~' + maxi ;
-      	 }
-    }
-	
-</script>
-<br>
-<form name="main" id="xd">
-	<input id="input" type="text" onkeypress="if (window.event.keyCode==13) return false;" style="width: 100px; height: 50px;font-size: 26px">
-	<br><br>
-	<input id="submit" type="button" onclick="guess()" value="決定!" style="width: 80px; height: 50px;font-size: 22px ">
+<form name="main" id="xd" autocomplete="off">
+  <input id="input" type="text" onkeypress="if (window.event.keyCode==13) return false;" style="width: 100px; height: 50px;font-size: 26px; font-family: 'Hall Fetica+' ">
+  <br><br>
+  <input id="submit" type="button" onclick="guess()" value="決定!" style="width: 80px; height: 50px;font-size: 22px ">
 </form>
 
 
-    
-<!--C++
-   #include<stdio.h>
-    #include<stdlib.h>
-    #include<iostream>
-    #include<time.h>
-int main(){
-    std::cout<<"*****歐洲血統測試*****\n"<<"請猜0~48763的一整數:";
-    srand(time(NULL));
-    int wow=(rand()*48431+66641)%48764;
-    int maxi=48763, mini=0;
-    int input=0;
-    for(int t=1;"shou"=="shou";t++){
-        std::cin>>input;
-        if(input==wow){
-            if(t>=1&&t<=3){std::cout<<"靠!你一定有開外掛";}
-            else if(t>=4&&t<=15){std::cout<<"U秀";}
-            else if(t>=15&&t<=30){std::cout<<"勉強啦";}
-            else {std::cout<<"爛透了";}
-            std::cout<<"\n+++---你猜了"<<t<<"次---+++";
-            return 48763;
+<script type="text/javascript">
+	  var n = Math.floor( Math.random() * (48763 - 0 + 1) ) ;	//Math.random = 0~1
+    var maxi=48763, mini=0;
+    var t= -1;
+    guess();
+
+function guess(){
+	var inpu = parseInt(document.forms["main"].input.value);
+
+  if(inpu>=maxi || inpu<=mini && t!=-1){
+     alert("爆表了!!!\n請重選")
+  }
+  else{
+     t+=1;
+     check();
+     range();
+  }
+  document.forms["main"].input.value='';
+
+  function check(){
+        if(inpu==n){
+            if(t>=1&&t<=3){
+              document.getElementById('status').innerHTML ="你100%有開外掛";
+            }
+            else if(t>=4&&t<=12){
+              document.getElementById('status').innerHTML ="歐皇耶";
+            }
+            else if(t>=13&&t<=22){
+              document.getElementById('status').innerHTML ="很好啊";
+            }
+            else if(t>=23&&t<=30){
+              document.getElementById('status').innerHTML ="勉強啦";
+            }
+            else if(t>=31&&t<=49){
+              document.getElementById('status').innerHTML ="很明顯的，你是非酉";
+            }
+            else if(t>=50){
+              document.getElementById('status').innerHTML ="天啊，根本就是黑奴";
+            }
+            document.getElementById('status2').innerHTML = "~~~你猜了" + t + "次~~~";
+            $('#xd').fadeOut(487.63);
+            $('#guide').fadeOut(487.63);
+            $('#rangebar').fadeOut(487.63);
+            $('#RE').fadeIn(3000);
         }
-
-
-
-        if(input>wow){
-            std::cout<<"小一點!";maxi=input;
-        }
-
-        if(input<wow){std::cout<<"大一點!";mini=input;}
-        std::cout<<"(範圍:"<<mini<<'~'<<maxi<<"):";
     }
 
-    }
--->
+  function range(){
+         if(inpu>n && t!=0){
+            document.getElementById('status').innerHTML = "小一點!";
+              maxi=inpu;
+        
+         }
+
+          if(inpu<n && t!=0){
+            document.getElementById('status').innerHTML ="大一點!";
+              mini=inpu;          
+          }
+
+         
+         document.getElementById('mini.tag').innerHTML = mini ; 
+         document.getElementById('maxi.tag').innerHTML = maxi ; 
+         document.getElementById('percent.tag').innerHTML = Math.floor((maxi-mini)/48763*10000)/100 + "%" ; 
+         document.getElementById('guide').innerHTML = "請猜 " + mini +" ~ " + maxi + " 的一整數:"
+  }
+
+}
+
+	
+</script>
+
+
+<br>
+
+
+
 </body>
 </html>
